@@ -1,5 +1,17 @@
 [user]
-	name = Eric Lam
+	name = ehylam
 	email = 48621527+ehylam@users.noreply.github.com
 [init]
 	defaultBranch = main
+[core]
+	excludesfile = /Users/ericlam/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Work/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/ericlam/.stCommitMsg
+[credential]
+	helper = osxkeychain

@@ -12,7 +12,8 @@ git clone git@github.com:ehylam/.dotfiles.git
 
 3. using `ln` link the files in the cloned repo with the files in the home directory
 ```
-ln -s ~/.dotfiles/.zshrc ~/.zshrc
+ln -s ~/.dotfiles/.config/fish ~/.config/fish
+ln -s ~/.dotfiles/.config/nvim ~/.config/nvim
 ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
 ```
 
@@ -25,7 +26,3 @@ ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
 ```
 brew bundle --file ~/.dotfiles/Brewfile
 ```
-
-
-TODO:
-* Add VScode to brew.

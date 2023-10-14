@@ -1,0 +1,20 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.0.0/schema.json",
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noCommentText": "warn",
+        "noShadowRestrictedNames": "warn"
+      },
+      "style": {
+        "noUnusedTemplateLiteral": "warn"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": false
+  }
+}

@@ -46,10 +46,31 @@ switch (uname)
   case Linux
     source (dirname (status --current-filename))/config-linux.fish
   case '*'
-    source (dirname (status --current-filename))/config-windows.fish
+    source (dirname (status --current-filename))/config-windowkitt
+    s.fish
 end
 
 set LOCAL_CONFIG (dirname (status --current-filename))/config-local.fish
 if test -f $LOCAL_CONFIG
   source $LOCAL_CONFIG
 end
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /Users/ericlam/miniforge3/bin/conda && status is-interactive
+    eval /Users/ericlam/miniforge3/bin/conda "shell.fish" "hook" $argv | source
+end
+# <<< conda initialize <<<
+
+
+# pnpm
+set -gx PNPM_HOME "/Users/ericlam/Library/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+set -gx PATH "$HOME/.cargo/bin" $PATH;
+# pnpm end
+
+
+set --export ANDROID_SDK_ROOT $HOME/Library/Android/sdk;
+
+set -gx PATH $ANDROID_SDK_ROOT/emulator $PATH;
+set -gx PATH $ANDROID_SDK_ROOT/platform-tools $PATH;

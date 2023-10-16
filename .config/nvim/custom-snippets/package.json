@@ -33,6 +33,13 @@
           "liquid"
         ],
         "path": "./snippets/liquid.json"
+      },
+      {
+        "language": [
+          "css",
+          "scss"
+        ],
+        "path": "./snippets/css.json"
       }
     ]
   }

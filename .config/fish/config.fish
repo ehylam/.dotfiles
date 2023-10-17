@@ -30,6 +30,9 @@ set -gx PATH node_modules/.bin $PATH
 set -g GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
 
+# PHP brew
+set -gx PATH /usr/local/opt/php@8.2/bin $PATH
+
 # NVM
 function __check_rvm --on-variable PWD --description 'Do nvm stuff'
   status --is-command-substitution; and return

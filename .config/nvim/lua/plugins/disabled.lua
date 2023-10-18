@@ -1,4 +1,4 @@
 return {
-  { "rcarriga/nvim-notify", enabled = false },
-  { "folke/neoconf.nvim", enabled = false },
+	{ "folke/neoconf.nvim", enabled = false },
+	{ "cshuaimin/ssr.nvim", enabled = false },
 }

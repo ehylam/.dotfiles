@@ -2,10 +2,9 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
--- Set conceal level to 0
 vim.o.conceallevel = 0
 
-vim.opt.winbar = "%=%m %f"
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- Array of file names indicating root directory. Modify to your liking.
 local root_names = { ".git", "Makefile" }

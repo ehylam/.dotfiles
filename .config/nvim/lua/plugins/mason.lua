@@ -15,8 +15,6 @@ return {
 				-- php
 				"pint",
 				"phpactor",
-				-- astro
-				"astro-language-server",
 			},
 		},
 	},

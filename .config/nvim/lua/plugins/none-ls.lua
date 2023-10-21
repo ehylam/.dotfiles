@@ -5,20 +5,6 @@ end
 
 local b = none_ls.builtins
 
-local function deno_config_exists()
-  local current_dir = vim.fn.getcwd()
-  local config_file = current_dir .. "/deno.json"
-  if vim.fn.filereadable(config_file) == 1 then
-    return true
-  end
-
-  local jsonc_file = current_dir .. "/deno.jsonc"
-  if vim.fn.filereadable(jsonc_file) == 1 then
-    return true
-  end
-
-  return false
-end
 
 -- Helper function to traverse up directory tree and find if a file exists
 local function find_upwards(filename)
@@ -93,29 +79,18 @@ return {
       b.diagnostics.codespell,
       b.diagnostics.misspell,
 
-      -- tailwind
-      b.formatting.rustywind.with({
-        filetypes = { "html", "css", "javascriptreact", "typescriptreact", "svelte" },
-      }),
 
-      -- deno
-      b.formatting.deno_fmt.with({
-        filetypes = { "javascript", "javascriptreact", "json", "jsonc", "typescript", "typescriptreact" },
-        condition = function()
-          return deno_config_exists()
-        end,
-      }),
       -- prettier
       b.formatting.prettier.with({
         condition = function()
-          return not deno_config_exists() and not biome_config_exists() and prettier_config_dir()
+          return not biome_config_exists() and prettier_config_dir()
         end,
       }),
 
       -- biome
       b.formatting.biome.with({
         condition = function()
-          return biome_config_exists() and not prettier_config_dir() and not deno_config_exists()
+          return biome_config_exists() and not prettier_config_dir()
         end,
       }),
 

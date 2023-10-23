@@ -35,45 +35,45 @@ set -gx PATH /usr/local/opt/php@8.2/bin $PATH
 
 # NVM
 function __check_rvm --on-variable PWD --description 'Do nvm stuff'
-  status --is-command-substitution; and return
+    status --is-command-substitution; and return
 
-  if test -f .nvmrc; and test -r .nvmrc;
-    nvm use
-  else
-  end
+    if test -f .nvmrc; and test -r .nvmrc
+        nvm use
+    else
+    end
 end
 
 switch (uname)
-  case Darwin
-    source (dirname (status --current-filename))/config-osx.fish
-  case Linux
-    source (dirname (status --current-filename))/config-linux.fish
-  case '*'
-    source (dirname (status --current-filename))/config-windowkitt
-    s.fish
+    case Darwin
+        source (dirname (status --current-filename))/config-osx.fish
+    case Linux
+        source (dirname (status --current-filename))/config-linux.fish
+    case '*'
+        source (dirname (status --current-filename))/config-windowkitt
+        s.fish
 end
 
 set LOCAL_CONFIG (dirname (status --current-filename))/config-local.fish
 if test -f $LOCAL_CONFIG
-  source $LOCAL_CONFIG
+    source $LOCAL_CONFIG
 end
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 if test -f /Users/ericlam/miniforge3/bin/conda && status is-interactive
-    eval /Users/ericlam/miniforge3/bin/conda "shell.fish" "hook" $argv | source
+    eval /Users/ericlam/miniforge3/bin/conda "shell.fish" hook $argv | source
 end
 # <<< conda initialize <<<
 
 
 # pnpm
-set -gx PNPM_HOME "/Users/ericlam/Library/pnpm"
+set -gx PNPM_HOME /Users/ericlam/Library/pnpm
 set -gx PATH "$PNPM_HOME" $PATH
-set -gx PATH "$HOME/.cargo/bin" $PATH;
+set -gx PATH "$HOME/.cargo/bin" $PATH
 # pnpm end
 
 
-set --export ANDROID_SDK_ROOT $HOME/Library/Android/sdk;
+set --export ANDROID_SDK_ROOT $HOME/Library/Android/sdk
 
-set -gx PATH $ANDROID_SDK_ROOT/emulator $PATH;
-set -gx PATH $ANDROID_SDK_ROOT/platform-tools $PATH;
+set -gx PATH $ANDROID_SDK_ROOT/emulator $PATH
+set -gx PATH $ANDROID_SDK_ROOT/platform-tools $PATH

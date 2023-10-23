@@ -3,7 +3,11 @@ local act = wezterm.action
 local config = {}
 
 config.color_scheme = "Andromeda"
-
+config.font = wezterm.font_with_fallback({
+	"Fira Code",
+	"JetBrains Mono",
+	"IBM Plex Mono",
+})
 -- Show which key table is active in the status area
 wezterm.on("update-right-status", function(window, pane)
 	local name = window:active_key_table()

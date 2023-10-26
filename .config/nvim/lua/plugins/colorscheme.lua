@@ -18,7 +18,6 @@ local function selectColorSchemeByTime()
 		"rose-pine",
 		"catppuccin-frappe",
 		"everforest",
-		"dracula",
 		"kanagawa",
 		"embark",
 		"nordic",
@@ -95,22 +94,22 @@ return {
 		end,
 		lazy = true,
 	},
-	{
-		"Mofiqul/dracula.nvim",
-		opts = {
-			transparent_bg = is_transparent,
-			show_end_of_buffer = true,
-			-- set italic comment
-			italic_comment = true,
-		},
-		config = function(_, opts)
-			local dracula = require("dracula")
-			dracula.setup(opts)
-			-- Disable spell check as it's too red
-			vim.o.spell = false
-		end,
-		lazy = true,
-	},
+	-- {
+	-- 	"Mofiqul/dracula.nvim",
+	-- 	opts = {
+	-- 		transparent_bg = is_transparent,
+	-- 		show_end_of_buffer = true,
+	-- 		-- set italic comment
+	-- 		italic_comment = true,
+	-- 	},
+	-- 	config = function(_, opts)
+	-- 		local dracula = require("dracula")
+	-- 		dracula.setup(opts)
+	-- 		-- Disable spell check as it's too red
+	-- 		vim.o.spell = false
+	-- 	end,
+	-- 	lazy = true,
+	-- },
 	-- default is tokyonight in moon style
 	{
 		"folke/tokyonight.nvim",

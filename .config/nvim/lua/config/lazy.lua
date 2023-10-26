@@ -46,3 +46,54 @@ require("lazy").setup({
 		},
 	},
 })
+
+local nvim_lsp = require("lspconfig")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+nvim_lsp.emmet_language_server.setup({
+	-- on_attach = on_attach,
+	capabilities = capabilities,
+	filetypes = {
+		"php",
+		"css",
+		"eruby",
+		"html",
+		"javascript",
+		"javascriptreact",
+		"less",
+		"sass",
+		"scss",
+		"svelte",
+		"pug",
+		"typescriptreact",
+		"vue",
+	},
+})
+nvim_lsp.intelephense.setup({
+	settings = {
+		intelephense = {
+			stubs = {
+				"bcmath",
+				"bz2",
+				"calendar",
+				"Core",
+				"curl",
+				"zip",
+				"zlib",
+				"wordpress",
+				"woocommerce",
+				"acf-pro",
+				"wordpress-globals",
+				"wp-cli",
+				"genesis",
+				"polylang",
+			},
+			environment = {
+				includePaths = "/Users/ericlam/.composer/vendor/php-stubs/", -- this line forces the composer path for the stubs in case inteliphense don't find it...
+			},
+			files = {
+				maxSize = 5000000,
+			},
+		},
+	},
+})

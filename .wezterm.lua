@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local mux = wezterm.mux
 local act = wezterm.action
 local config = {}
 
@@ -8,6 +9,35 @@ config.font = wezterm.font_with_fallback({
 	"JetBrains Mono",
 	"IBM Plex Mono",
 })
+wezterm.on("gui-startup", function(cmd)
+	local tab, pane, window = mux.spawn_window(cmd or {})
+	window:gui_window():maximize()
+	-- allow `wezterm start -- something` to affect what we spawn
+	-- in our initial window
+	local args = {}
+	if cmd then
+		args = cmd.args
+	end
+
+	-- Set a workspace for coding on a current project
+	-- Top pane is for the editor, bottom pane is for the build tool
+	local project_dir = wezterm.home_dir .. "/documents/sites"
+	local tab, build_pane, window = mux.spawn_window({
+		workspace = "coding",
+		cwd = project_dir,
+		args = args,
+	})
+
+	local editor_pane = build_pane:split({
+		direction = "Top",
+		size = 0.95,
+		cwd = project_dir,
+	})
+
+	-- We want to startup in the coding workspace
+	mux.set_active_workspace("coding")
+end)
+
 -- Show which key table is active in the status area
 wezterm.on("update-right-status", function(window, pane)
 	local name = window:active_key_table()
@@ -152,8 +182,9 @@ config.key_tables = {
 				flags = "FUZZY|WORKSPACES",
 			}),
 		},
-		{ key = "n", mods = "CTRL", action = act.SwitchWorkspaceRelative(1) },
-		{ key = "p", mods = "CTRL", action = act.SwitchWorkspaceRelative(-1) },
+		-- delete workspace
+		{ key = "l", action = act.SwitchWorkspaceRelative(1) },
+		{ key = "h", action = act.SwitchWorkspaceRelative(-1) },
 		{
 			key = "n",
 			action = act.PromptInputLine({

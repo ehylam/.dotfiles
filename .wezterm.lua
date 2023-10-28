@@ -49,6 +49,14 @@ config.keys = {
 			timeout_milliseconds = 1000,
 		}),
 	},
+	{
+		key = "W",
+		mods = "LEADER",
+		action = act.ActivateKeyTable({
+			name = "workspace",
+			timeout_milliseconds = 1000,
+		}),
+	},
 	{ key = "w", mods = "LEADER", action = wezterm.action({ CloseCurrentPane = { confirm = true } }) },
 	-- activate pane selection mode with the default alphabet (labels are "a", "s", "d", "f" and so on)
 	{ key = "8", mods = "CTRL", action = act.PaneSelect },
@@ -115,6 +123,60 @@ config.key_tables = {
 		{ key = "l", action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
 		{ key = "j", action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 		{ key = "k", action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
+	},
+
+	workspace = {
+		{
+			key = "y",
+			action = act.SwitchToWorkspace({
+				name = "default",
+			}),
+		},
+		-- Switch to a monitoring workspace, which will have `top` launched into it
+		{
+			key = "u",
+			action = act.SwitchToWorkspace({
+				name = "monitoring",
+				spawn = {
+					args = { "top" },
+				},
+			}),
+		},
+		-- Create a new workspace with a random name and switch to it
+		{ key = "i", action = act.SwitchToWorkspace },
+		-- Show the launcher in fuzzy selection mode and have it list all workspaces
+		-- and allow activating one.
+		{
+			key = "9",
+			action = act.ShowLauncherArgs({
+				flags = "FUZZY|WORKSPACES",
+			}),
+		},
+		{ key = "n", mods = "CTRL", action = act.SwitchWorkspaceRelative(1) },
+		{ key = "p", mods = "CTRL", action = act.SwitchWorkspaceRelative(-1) },
+		{
+			key = "n",
+			action = act.PromptInputLine({
+				description = wezterm.format({
+					{ Attribute = { Intensity = "Bold" } },
+					{ Foreground = { AnsiColor = "Fuchsia" } },
+					{ Text = "Enter name for new workspace" },
+				}),
+				action = wezterm.action_callback(function(window, pane, line)
+					-- line will be `nil` if they hit escape without entering anything
+					-- An empty string if they just hit enter
+					-- Or the actual line of text they wrote
+					if line then
+						window:perform_action(
+							act.SwitchToWorkspace({
+								name = line,
+							}),
+							pane
+						)
+					end
+				end),
+			}),
+		},
 	},
 }
 

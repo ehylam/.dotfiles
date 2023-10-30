@@ -23,7 +23,7 @@ wezterm.on("gui-startup", function(cmd)
 	-- Top pane is for the editor, bottom pane is for the build tool
 	local project_dir = wezterm.home_dir .. "/documents/sites"
 	local tab, build_pane, window = mux.spawn_window({
-		workspace = "coding",
+		workspace = "dev",
 		cwd = project_dir,
 		args = args,
 	})
@@ -162,6 +162,12 @@ config.key_tables = {
 				name = "default",
 			}),
 		},
+		{
+			key = "c",
+			action = act.SwitchToWorkspace({
+				name = "dev",
+			}),
+		},
 		-- Switch to a monitoring workspace, which will have `top` launched into it
 		{
 			key = "u",
@@ -182,7 +188,6 @@ config.key_tables = {
 				flags = "FUZZY|WORKSPACES",
 			}),
 		},
-		-- delete workspace
 		{ key = "l", action = act.SwitchWorkspaceRelative(1) },
 		{ key = "h", action = act.SwitchWorkspaceRelative(-1) },
 		{

@@ -5,6 +5,7 @@ return {
 		opts = {
 			ensure_installed = {
 				"stylua",
+				"emmet-language-server",
 				-- formatters
 				"eslint_d",
 				"prettier",

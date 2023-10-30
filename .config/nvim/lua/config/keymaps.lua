@@ -37,6 +37,8 @@ else
 	keymap("n", "<S-q>", "<cmd>bd<CR>", opts)
 end
 
+keymap("n", "<leader>\\", "<cmd>:Lazy<CR>", { desc = "Lazy Plugins" })
+
 -- Better paste
 -- remap "p" in visual mode to delete the highlighted text without overwriting your yanked/copied text, and then paste the content from the unnamed register.
 keymap("v", "p", '"_dP', opts)
@@ -58,8 +60,19 @@ keymap("i", "<A-Up>", "<Esc>:m .-2<CR>==gi", opts)
 keymap("v", "<A-Down>", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "<A-Up>", ":m '<-2<CR>gv=gv", opts)
 
+-- Resize window using <ctrl> arrow keys
+keymap("n", "<C-Up>", "<cmd>resize +0<cr>", { desc = "Increase window height" })
+keymap("n", "<C-Down>", "<cmd>resize -0<cr>", { desc = "Decrease window height" })
+keymap("n", "<C-Left>", "<cmd>vertical resize -0<cr>", { desc = "Decrease window width" })
+keymap("n", "<C-Right>", "<cmd>vertical resize +0<cr>", { desc = "Increase window width" })
+keymap("n", "<leader>j", "<C-W>s", { desc = "Split window below" })
+keymap("n", "<leader>l", "<C-W>v", { desc = "Split window right" })
+
 -- Show Lsp info
 keymap("n", "<leader>cl", "<cmd>LspInfo<CR>", opts)
+
+-- Floating terminal
+keymap("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
 -- Show references on telescope
 if Util.has("telescope.nvim") then

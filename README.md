@@ -15,7 +15,8 @@ git clone git@github.com:ehylam/.dotfiles.git
 ```
 ln -s ~/.dotfiles/.config/fish ~/.config/fish
 ln -s ~/.dotfiles/.config/nvim ~/.config/nvim
-ln -s ~/.dotfiles/.config/zellji/config.kdl ~/.config/zellji/config.kdl
+ln -s ~/.dotfiles/.config/kickstart ~/.config/kickstart
+ln -s ~/.dotfiles/.config/chad ~/.config/chad
 ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
 ```
 

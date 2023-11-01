@@ -77,3 +77,33 @@ set --export ANDROID_SDK_ROOT $HOME/Library/Android/sdk
 
 set -gx PATH $ANDROID_SDK_ROOT/emulator $PATH
 set -gx PATH $ANDROID_SDK_ROOT/platform-tools $PATH
+
+# Define functions for different Neovim configurations
+function nvim-default
+    env NVIM_APPNAME=nvim nvim $argv
+end
+
+function nvim-kickstart
+    env NVIM_APPNAME=kickstart nvim $argv
+end
+
+function nvim-chad
+    env NVIM_APPNAME=chad nvim $argv
+end
+
+# Create a function to select the Neovim configuration and open a file if specified
+function nvims
+    set items default kickstart chad
+    set selected_config (printf "%s\n" $items | fzf --prompt=" Neovim Config = " --height=50% --layout=reverse --border --exit-0)
+
+    switch $selected_config
+        case default
+            nvim-default $argv
+        case kickstart
+            nvim-kickstart $argv
+        case chad
+            nvim-chad $argv
+        case *
+            echo "Invalid selection"
+    end
+end

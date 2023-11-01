@@ -3,5 +3,5 @@ return {
 	{ "nvim-tinygit.nvim", enabled = false },
 	{ "folk/persistence.nvim", enabled = false },
 	{ "stevearc/oil.nvim", enabled = false },
-	{ "nvim-pack/nvim-spectre", enabled = false },
+	{ "cshuaimin/ssr.nvim", enabled = false },
 }

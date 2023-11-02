@@ -91,9 +91,14 @@ function nvim-chad
     env NVIM_APPNAME=chad nvim $argv
 end
 
+function nvim-lite
+    env NVIM_APPNAME=lite nvim $argv
+end
+
+
 # Create a function to select the Neovim configuration and open a file if specified
 function nvims
-    set items default kickstart chad
+    set items default lite kickstart chad
     set selected_config (printf "%s\n" $items | fzf --prompt=" Neovim Config = " --height=50% --layout=reverse --border --exit-0)
 
     switch $selected_config
@@ -103,6 +108,9 @@ function nvims
             nvim-kickstart $argv
         case chad
             nvim-chad $argv
+        case lite
+            nvim-lite $argv
+
         case *
             echo "Invalid selection"
     end

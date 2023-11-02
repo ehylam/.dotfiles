@@ -46,6 +46,7 @@ vim.g.maplocalleader = ' '
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
+local keymap = vim.keymap.set
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -227,7 +228,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -560,5 +561,60 @@ cmp.setup {
   },
 }
 
+keymap('n', '<leader>\\', '<cmd>:Lazy<CR>', { desc = 'Lazy Plugins' })
+
+-- Better paste
+-- remap "p" in visual mode to delete the highlighted text without overwriting your yanked/copied text, and then paste the content from the unnamed register.
+keymap('v', 'p', '"_dP', opts)
+
+-- Copy whole file content to clipboard with C-c
+keymap('n', '<C-c>', ':%y+<CR>', opts)
+
+-- Visual --
+-- Stay in indent mode
+keymap('v', '<', '<gv', opts)
+keymap('v', '>', '>gv', opts)
+
+-- Move live up or down
+-- moving
+keymap('n', '<A-Down>', ':m .+1<CR>', opts)
+keymap('n', '<A-Up>', ':m .-2<CR>', opts)
+keymap('i', '<A-Down>', '<Esc>:m .+1<CR>==gi', opts)
+keymap('i', '<A-Up>', '<Esc>:m .-2<CR>==gi', opts)
+keymap('v', '<A-Down>', ":m '>+1<CR>gv=gv", opts)
+keymap('v', '<A-Up>', ":m '<-2<CR>gv=gv", opts)
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+-- Array of file names indicating root directory. Modify to your liking.
+local root_names = { '.git', 'style.css', '.gitignore' }
+
+-- Cache to use for speed up (at cost of possibly outdated results)
+local root_cache = {}
+
+local set_root = function()
+  -- Get directory path to start search from
+  local path = vim.api.nvim_buf_get_name(0)
+  if path == '' then
+    return
+  end
+  path = vim.fs.dirname(path)
+
+  -- Try cache and resort to searching upward for root directory
+  local root = root_cache[path]
+  if root == nil then
+    local root_file = vim.fs.find(root_names, { path = path, upward = true })[1]
+    if root_file == nil then
+      return
+    end
+    root = vim.fs.dirname(root_file)
+    root_cache[path] = root
+  end
+
+  -- Set current directory
+  vim.fn.chdir(root)
+end
+
+local root_augroup = vim.api.nvim_create_augroup('MyAutoRoot', {})
+vim.api.nvim_create_autocmd('BufEnter', { group = root_augroup, callback = set_root })

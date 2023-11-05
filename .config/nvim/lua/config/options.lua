@@ -12,7 +12,7 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 
 -- Array of file names indicating root directory. Modify to your liking.
-local root_names = { ".git", "style.css", ".gitignore" }
+local root_names = { ".git", ".gitignore" }
 
 -- Cache to use for speed up (at cost of possibly outdated results)
 local root_cache = {}

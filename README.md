@@ -17,7 +17,7 @@ ln -s ~/.dotfiles/.config/fish ~/.config/fish
 ln -s ~/.dotfiles/.config/lite ~/.config/lite
 ln -s ~/.dotfiles/.config/nvim ~/.config/nvim
 ln -s ~/.dotfiles/.config/kickstart ~/.config/kickstart
-ln -s ~/.dotfiles/.config/chad ~/.config/chad
+ln -s ~/.dotfiles/.config/alt ~/.config/alt
 ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
 ```
 

@@ -75,3 +75,57 @@ require("lazy").setup({
   },
   debug = false,
 })
+
+local nvim_lsp = require("lspconfig")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+nvim_lsp.emmet_language_server.setup({
+  -- on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {
+    "php",
+    "css",
+    "eruby",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "liquid",
+    "less",
+    "sass",
+    "scss",
+    "svelte",
+    "pug",
+    "typescriptreact",
+    "vue",
+  },
+})
+
+local ls = require("luasnip")
+
+require("luasnip.loaders.from_lua").load({
+  paths = "~/.config/nvim/custom-snippets/lua-snippets/",
+})
+
+require("luasnip").config.setup({ store_selection_keys = "<A-p>" })
+
+vim.cmd([[command! LuaSnipEdit :lua require("luasnip.loaders.from_lua").edit_snippet_files()]]) --}}}
+
+-- Virtual Text{{{
+local types = require("luasnip.util.types")
+ls.config.set_config({
+  history = true, --keep around last snippet local to jump back
+  updateevents = "TextChanged,TextChangedI", --update changes as you type
+  enable_autosnippets = true,
+  ext_opts = {
+    [types.choiceNode] = {
+      active = {
+        virt_text = { { "●", "GruvboxOrange" } },
+      },
+    },
+    -- [types.insertNode] = {
+    -- 	active = {
+    -- 		virt_text = { { "●", "GruvboxBlue" } },
+    -- 	},
+    -- },
+  },
+}) --}}}

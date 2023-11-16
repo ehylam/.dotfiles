@@ -14,9 +14,6 @@ keymap.set("n", "-", "<C-x>")
 -- Delete a word backwards
 keymap.set("n", "dw", 'vb"_d')
 
--- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
-
 -- Save with root permission (not working for now)
 --vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
 
@@ -26,6 +23,9 @@ keymap.set("n", "<Leader>O", "O<Esc>^Da", opts)
 
 -- Jumplist
 keymap.set("n", "<C-m>", "<C-i>", opts)
+
+-- Copy All contents
+keymap("n", "<C-c>", ":%y+<CR>", opts)
 
 -- New tab
 keymap.set("n", "te", ":tabedit")
@@ -52,5 +52,5 @@ keymap.set("n", "<C-j>", function()
 end, opts)
 
 keymap.set("n", "<leader>r", function()
-  require("craftzdog.utils").replaceHexWithHSL()
+  require("lam.utils").replaceHexWithHSL()
 end)

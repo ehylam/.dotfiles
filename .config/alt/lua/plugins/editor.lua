@@ -13,6 +13,35 @@ return {
   },
 
   {
+    "L3MON4D3/LuaSnip",
+    build = (not jit.os:find("Windows"))
+        and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
+      or nil,
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+        require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/custom-snippets" } })
+      end,
+    },
+    opts = {
+      history = true,
+      delete_check_events = "TextChanged",
+    },
+  -- stylua: ignore
+    keys = {
+      {
+        "<tab>",
+        function()
+          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+        end,
+        expr = true, silent = true, mode = "i",
+      },
+      { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
+      { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+    },
+  },
+  {
     "echasnovski/mini.hipatterns",
     event = "BufReadPre",
     opts = {
@@ -135,7 +164,7 @@ return {
             path = "%:p:h",
             cwd = telescope_buffer_dir(),
             respect_gitignore = false,
-            hidden = true,
+            hidden = false,
             grouped = true,
             previewer = false,
             initial_mode = "normal",
@@ -202,6 +231,44 @@ return {
       telescope.setup(opts)
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("file_browser")
+    end,
+  },
+  {
+    "ThePrimeagen/harpoon",
+    lazy = true,
+    keys = {
+      {
+        "<leader>a",
+        function()
+          require("harpoon.mark").add_file()
+          vim.notify("Mark added")
+        end,
+        desc = "[Harpoon] Add mark",
+      },
+      {
+        "<leader>m",
+        "<cmd>Telescope harpoon marks<CR>",
+        desc = "[Harpoon] Marks",
+      },
+      {
+        "<leader>]",
+        function()
+          require("harpoon.ui").nav_next()
+        end,
+        desc = "[Harpoon] Next mark",
+      },
+      {
+        "<leader>[",
+        function()
+          require("harpoon.ui").nav_prev()
+        end,
+        desc = "[Harpoon] Prev mark",
+      },
+    },
+    config = function()
+      require("harpoon").setup({})
+
+      require("telescope").load_extension("harpoon")
     end,
   },
 }

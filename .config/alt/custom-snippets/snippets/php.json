@@ -1,0 +1,7 @@
+{
+  "field:repeater": {
+    "prefix": "field:repeater",
+    "body": "<?php if ( have_rows('${1:field_name}') ) : ?>\r\n\r\n\t<?php while( have_rows('${1:field_name}') ) : the_row(); ?>\r\n\t\t$4\r\n\t<?php endwhile; ?>\r\n\r\n<?php endif; ?>\r\n",
+    "description": "ACF repeater field"
+  }
+}

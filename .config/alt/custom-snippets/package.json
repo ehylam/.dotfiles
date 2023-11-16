@@ -1,0 +1,46 @@
+{
+  "name": "custom-snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "markdown",
+          "html",
+          "php",
+          "scss",
+          "css",
+          "liquid"
+        ],
+        "path": "./snippets/global.json"
+      },
+      {
+        "language": [
+          "json"
+        ],
+        "path": "./snippets/json.json"
+      },
+      {
+        "language": [
+          "php"
+        ],
+        "path": "./snippets/php.json"
+      },
+      {
+        "language": [
+          "liquid"
+        ],
+        "path": "./snippets/liquid.json"
+      },
+      {
+        "language": [
+          "css",
+          "scss"
+        ],
+        "path": "./snippets/css.json"
+      }
+    ]
+  }
+}

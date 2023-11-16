@@ -1,0 +1,220 @@
+{
+  "frontmatter": {
+    "prefix": "frontmatter",
+    "description": "Frontmatter",
+    "body": ["---", "$2", "---"]
+  },
+  "if": {
+    "prefix": "if",
+    "body": ["{% if ${1:condition} %}", "\t$2", "{% endif %}"]
+  },
+  "else": {
+    "prefix": "else",
+    "body": ["{% else %}", "\t"]
+  },
+  "elsif": {
+    "prefix": "elsif",
+    "body": ["{% elsif ${1:condition} %}", "\t"]
+  },
+  "if, elsif": {
+    "prefix": "if elsif",
+    "body": [
+      "{% if ${1:condition} %}",
+      "\t$2",
+      "{% elsif ${3:condition} %}",
+      "\t$4",
+      "{% endif %}"
+    ]
+  },
+  "if, else": {
+    "prefix": "if else",
+    "body": [
+      "{% if ${1:condition} %}",
+      "\t$2",
+      "{% else %}",
+      "\t$3",
+      "{% endif %}"
+    ]
+  },
+  "unless": {
+    "prefix": "unless",
+    "body": ["{% unless ${1:condition} %}", "\t$2", "{% endunless %}"]
+  },
+  "unless, else": {
+    "prefix": "unless else",
+    "body": [
+      "{% unless ${1:condition} %}",
+      "\t$2",
+      "{% else %}",
+      "\t$3",
+      "{% endunless %}"
+    ]
+  },
+  "case, else": {
+    "prefix": "case",
+    "body": [
+      "{% case ${1:variable} %}",
+      "\t{% when ${2:condition} %}",
+      "\t\t$3",
+      "\t{% else %}",
+      "\t\t$4",
+      "{% endcase %}"
+    ]
+  },
+  "when": {
+    "prefix": "when",
+    "description": "Control flow tag: when",
+    "body": ["{% when ${1:condition} %}", "$0"]
+  },
+  "cycle": {
+    "prefix": "cycle",
+    "description": "Iteration tag: cycle",
+    "body": ["{% cycle '${1:odd}', '${2:even}' %}"]
+  },
+  "cycle, group": {
+    "prefix": "cycle group",
+    "description": "Iteration tag: cycle group",
+    "body": ["{% cycle '${1:group name}': '${2:odd}', '${3:even}' %}"]
+  },
+  "for": {
+    "prefix": "for",
+    "body": ["{% for ${1:item} in ${2:collection} %}", "\t$3", "{% endfor %}"]
+  },
+  "break": {
+    "prefix": "break",
+    "body": ["{% break %}"]
+  },
+  "continue": {
+    "prefix": "continue",
+    "body": ["{% continue %}"]
+  },
+  "tablerow": {
+    "prefix": "tablerow",
+    "body": [
+      "{% tablerow ${1:item} in ${2:collection} cols: ${3:2} %}",
+      "\t$4",
+      "{% endtablerow %}"
+    ]
+  },
+  "assign": {
+    "prefix": "assign",
+    "body": ["{% assign ${1:variable} = ${2:value} %}"]
+  },
+  "increment": {
+    "prefix": "increment",
+    "body": ["{% increment ${1:variable} %}"]
+  },
+  "decrement": {
+    "prefix": "decrement",
+    "body": ["{% decrement ${1:variable} %}"]
+  },
+  "capture": {
+    "prefix": "capture",
+    "body": ["{% capture ${1:variable} %}", "\t$2", "{% endcapture %}"]
+  },
+  "liquid": {
+    "prefix": "liquid",
+    "body": ["{% liquid", "\t$1", "%}"]
+  },
+  "render": {
+    "prefix": "render",
+    "body": ["{% render $1 %}"]
+  },
+  "render, parameters": {
+    "prefix": "render",
+    "body": ["{% render $1, ${2:param}: ${3:value}"]
+  },
+  "include": {
+    "prefix": "include",
+    "body": ["{% include $1 %}"]
+  },
+  "include, parameters": {
+    "prefix": "includewith",
+    "body": ["{% include 1, ${2:param}: ${3:value} %}"]
+  },
+  "section": {
+    "prefix": "section",
+    "body": ["{% section $1 %}"]
+  },
+  "sections": {
+    "prefix": "sections",
+    "description": "Section Group",
+    "body": ["{% sections '${1:group}' %}"]
+  },
+  "raw": {
+    "prefix": "raw",
+    "description": "Theme tag: raw",
+    "body": ["{% raw %}", "\t$1", "{% endraw %}"]
+  },
+  "layout": {
+    "prefix": "layout",
+    "body": ["{% layout '${1:layout}' %}"]
+  },
+  "form": {
+    "prefix": "form",
+    "body": ["{% form '${1:name}', ${2:product} %}", "\t$3", "{% endform %}"]
+  },
+  "paginate": {
+    "prefix": "paginate",
+    "body": [
+      "{% paginate ${1:collection.products} by ${2:12} %}",
+      "\t{% for ${3:product} in ${1:collection.products} %}",
+      "\t\t$4",
+      "\t{% endfor %}",
+      "{% endpaginate %}"
+    ]
+  },
+  "schema": {
+    "prefix": "schema",
+    "body": [
+      "{% schema %}",
+      "{",
+      "\t\"name\": \"$1\",",
+      "\t\"settings\": [",
+      "\t\t$0",
+      "\t\t]",
+      "}",
+      "{% endschema %}"
+    ]
+  },
+  "style": {
+    "prefix": "style",
+    "body": ["{% style %}", "\t$1", "{% endstyle %}"]
+  },
+  "stylesheet": {
+    "prefix": "stylesheet",
+    "body": ["{% stylesheet %}", "\t$1", "{% endstylesheet %}"]
+  },
+  "javascript": {
+    "prefix": "javascript",
+    "body": ["{% javascript %}", "\t$1", "{% endjavascript %}"]
+  },
+  "comment, line": {
+    "prefix": "#",
+    "body": ["{% # $2 %}"]
+  },
+  "comment, block": {
+    "prefix": "comment",
+    "body": [
+      "{% comment %}",
+      "\t${1|esthetic-ignore,esthetic-ignore-start,esthetic-ignore-end,esthetic-ignore-next|}",
+      "{% endcomment %}"
+    ]
+  },
+  "esthetic-ignore": {
+    "prefix": "esthetic-",
+    "body": ["{% # esthetic-ignore %}"]
+  },
+  "esthetic-ignore-next": {
+    "prefix": "esthetic-",
+    "body": ["{% # esthetic-ignore-next %}"]
+  },
+  "esthetic-ignore-start": {
+    "prefix": "esthetic-",
+    "body": ["{% comment %}esthetic-ignore-start{% endcomment %}"]
+  },
+  "esthetic-ignore-end": {
+    "prefix": "esthetic-",
+    "body": ["{% comment %}esthetic-ignore-end{% endcomment %}"]
+  }
+}

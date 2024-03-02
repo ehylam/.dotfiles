@@ -60,8 +60,14 @@ end
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-if test -f /Users/ericlam/miniforge3/bin/conda && status is-interactive
-    eval /Users/ericlam/miniforge3/bin/conda "shell.fish" hook $argv | source
+if test -f /Users/ericlam/miniconda3/bin/conda
+    eval /Users/ericlam/miniconda3/bin/conda "shell.fish" hook $argv | source
+else
+    if test -f "/Users/ericlam/miniconda3/etc/fish/conf.d/conda.fish"
+        . "/Users/ericlam/miniconda3/etc/fish/conf.d/conda.fish"
+    else
+        set -x PATH /Users/ericlam/miniconda3/bin $PATH
+    end
 end
 # <<< conda initialize <<<
 
@@ -95,6 +101,11 @@ function nvim-lite
     env NVIM_APPNAME=lite nvim $argv
 end
 
+function nvim-vii
+    env NVIM_APPNAME=vii nvim $argv
+end
+
+
 function nvim-ecovim
     env NVIM_APPNAME=ecovim nvim $argv
 end
@@ -102,7 +113,7 @@ end
 
 # Create a function to select the Neovim configuration and open a file if specified
 function nvims
-    set items default lite kickstart alt
+    set items default lite kickstart alt vii
     set selected_config (printf "%s\n" $items | fzf --prompt=" Neovim Config = " --height=50% --layout=reverse --border --exit-0)
 
     switch $selected_config
@@ -112,6 +123,8 @@ function nvims
             nvim-kickstart $argv
         case lite
             nvim-lite $argv
+        case vii
+            nvim-vii $argv
         case alt
             nvim-alt $argv
         case *

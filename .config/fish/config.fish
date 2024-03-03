@@ -30,8 +30,11 @@ set -gx PATH node_modules/.bin $PATH
 set -g GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
 
-# PHP brew
-set -gx PATH /usr/local/opt/php@8.2/bin $PATH
+# # PHP brew
+# set -gx PATH /usr/local/opt/php@8.2/bin $PATH
+set -Ux fish_user_paths "/usr/local/opt/php@8.1/bin" $fish_user_paths
+set -Ux fish_user_paths "/usr/local/opt/php@8.1/sbin" $fish_user_paths
+
 
 # NVM
 function __check_rvm --on-variable PWD --description 'Do nvm stuff'
@@ -118,3 +121,8 @@ function nvims
             echo "Invalid selection"
     end
 end
+
+set -U fish_user_paths /usr/local/opt/ruby/bin $fish_user_paths
+
+
+source ~/.phpbrew/phpbrew.fish
